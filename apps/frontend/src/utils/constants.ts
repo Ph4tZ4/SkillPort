@@ -2,15 +2,21 @@
 // SkillPort — Application Constants
 // ============================================================
 
+import {
+  Laptop, Palette, BarChart3, ClipboardList, Music, Camera, Sparkles, Globe,
+  Code2, PlaySquare, Image as ImageIcon, TrendingUp, FileText, Link as LinkIcon,
+  Target, Bot, LineChart, Star, Building2
+} from 'lucide-react';
+
 export const PROFESSIONS = [
-  { value: 'tech', label: 'Technology', icon: '💻', color: 'from-blue-500 to-cyan-500' },
-  { value: 'creative', label: 'Creative', icon: '🎨', color: 'from-pink-500 to-rose-500' },
-  { value: 'marketing', label: 'Marketing', icon: '📊', color: 'from-green-500 to-emerald-500' },
-  { value: 'administration', label: 'Administration', icon: '📋', color: 'from-amber-500 to-orange-500' },
-  { value: 'music', label: 'Music', icon: '🎵', color: 'from-purple-500 to-violet-500' },
-  { value: 'photography', label: 'Photography', icon: '📷', color: 'from-teal-500 to-cyan-500' },
-  { value: 'design', label: 'Design', icon: '✨', color: 'from-fuchsia-500 to-pink-500' },
-  { value: 'other', label: 'Other', icon: '🌐', color: 'from-slate-500 to-gray-500' },
+  { value: 'tech', label: 'Technology', icon: Laptop, color: 'from-blue-500 to-cyan-500' },
+  { value: 'creative', label: 'Creative', icon: Palette, color: 'from-pink-500 to-rose-500' },
+  { value: 'marketing', label: 'Marketing', icon: BarChart3, color: 'from-green-500 to-emerald-500' },
+  { value: 'administration', label: 'Administration', icon: ClipboardList, color: 'from-amber-500 to-orange-500' },
+  { value: 'music', label: 'Music', icon: Music, color: 'from-purple-500 to-violet-500' },
+  { value: 'photography', label: 'Photography', icon: Camera, color: 'from-teal-500 to-cyan-500' },
+  { value: 'design', label: 'Design', icon: Sparkles, color: 'from-fuchsia-500 to-pink-500' },
+  { value: 'other', label: 'Other', icon: Globe, color: 'from-slate-500 to-gray-500' },
 ] as const;
 
 export const SKILL_LEVELS = [
@@ -21,12 +27,12 @@ export const SKILL_LEVELS = [
 ] as const;
 
 export const SECTION_TYPES = [
-  { value: 'code', label: 'Code / Project', icon: '🖥️' },
-  { value: 'media', label: 'Media Player', icon: '🎬' },
-  { value: 'gallery', label: 'Image Gallery', icon: '🖼️' },
-  { value: 'metrics', label: 'Business Metrics', icon: '📈' },
-  { value: 'text', label: 'Rich Text', icon: '📝' },
-  { value: 'link', label: 'External Links', icon: '🔗' },
+  { value: 'code', label: 'Code / Project', icon: Code2 },
+  { value: 'media', label: 'Media Player', icon: PlaySquare },
+  { value: 'gallery', label: 'Image Gallery', icon: ImageIcon },
+  { value: 'metrics', label: 'Business Metrics', icon: TrendingUp },
+  { value: 'text', label: 'Rich Text', icon: FileText },
+  { value: 'link', label: 'External Links', icon: LinkIcon },
 ] as const;
 
 export const JOB_STATUSES = [
@@ -52,31 +58,31 @@ export const FEATURES = [
   {
     title: 'Dynamic Portfolios',
     description: 'Replace static resumes with live, interactive presentation cards tailored to your profession.',
-    icon: '🎯',
+    icon: Target,
   },
   {
     title: 'AI-Powered Matching',
     description: 'Advanced semantic vector search finds perfect matches between talent and opportunities.',
-    icon: '🤖',
+    icon: Bot,
   },
   {
     title: 'Multi-Profession',
     description: 'Purpose-built for every career: developers, designers, musicians, marketers, and more.',
-    icon: '🌍',
+    icon: Globe,
   },
   {
     title: 'Real-Time Analytics',
     description: 'Track portfolio views, engagement metrics, and match insights with live dashboards.',
-    icon: '📊',
+    icon: LineChart,
   },
   {
     title: 'Skill Visualization',
     description: 'Showcase your expertise with beautiful skill maps, code demos, and media players.',
-    icon: '✨',
+    icon: Star,
   },
   {
     title: 'Enterprise Ready',
     description: 'Built for scale with event-driven architecture, handling millions of portfolios seamlessly.',
-    icon: '🏢',
+    icon: Building2,
   },
 ];

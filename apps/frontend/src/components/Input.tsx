@@ -22,14 +22,14 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className={cn('space-y-1.5', className)}>
       {label && (
-        <label className="block text-sm font-medium text-surface-700" htmlFor={id}>
+        <label className="block text-sm font-medium text-surface-700 dark:text-surface-300" htmlFor={id}>
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
         </label>
       )}
       <div className="relative">
         {icon && (
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-surface-400">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-surface-400 dark:text-surface-500">
             {icon}
           </div>
         )}
@@ -44,13 +44,13 @@ const Input: React.FC<InputProps> = ({
           className={cn(
             'input-field',
             !!icon && 'pl-11',
-            error && 'border-red-400 focus:ring-red-400/50 focus:border-red-400',
+            error && 'border-red-400 dark:border-red-500 focus:ring-red-400/50 dark:focus:ring-red-500/50 focus:border-red-400 dark:focus:border-red-500',
             disabled && 'opacity-50 cursor-not-allowed'
           )}
         />
       </div>
       {error && (
-        <p className="text-sm text-red-500 animate-fade-in">{error}</p>
+        <p className="text-sm text-red-500 dark:text-red-400 animate-fade-in">{error}</p>
       )}
     </div>
   );

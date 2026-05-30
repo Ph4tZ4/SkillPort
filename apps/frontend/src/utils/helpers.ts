@@ -51,16 +51,9 @@ export function truncate(str: string, maxLength: number): string {
  */
 export function stringToColor(str: string): string {
   const colors = [
-    'bg-blue-100 text-blue-700 border-blue-200',
-    'bg-purple-100 text-purple-700 border-purple-200',
-    'bg-green-100 text-green-700 border-green-200',
-    'bg-amber-100 text-amber-700 border-amber-200',
-    'bg-pink-100 text-pink-700 border-pink-200',
-    'bg-cyan-100 text-cyan-700 border-cyan-200',
-    'bg-indigo-100 text-indigo-700 border-indigo-200',
-    'bg-rose-100 text-rose-700 border-rose-200',
-    'bg-teal-100 text-teal-700 border-teal-200',
-    'bg-orange-100 text-orange-700 border-orange-200',
+    'bg-surface-100 dark:bg-brand-900 text-surface-700 dark:text-brand-100 border-surface-200 dark:border-brand-800',
+    'bg-brand-50 dark:bg-brand-800 text-brand-900 dark:text-brand-50 border-brand-100 dark:border-brand-700',
+    'bg-surface-50 dark:bg-surface-900 text-surface-600 dark:text-surface-300 border-surface-200 dark:border-surface-800',
   ];
 
   let hash = 0;
@@ -101,19 +94,21 @@ export function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: numb
   }) as T;
 }
 
+import { LucideIcon, Laptop, Palette, BarChart3, ClipboardList, Music, Camera, Sparkles, Globe } from 'lucide-react';
+
 /**
  * Get profession display info.
  */
 export function getProfessionInfo(profession: string) {
-  const map: Record<string, { label: string; icon: string; gradient: string }> = {
-    tech: { label: 'Technology', icon: '💻', gradient: 'from-blue-500 to-cyan-500' },
-    creative: { label: 'Creative', icon: '🎨', gradient: 'from-pink-500 to-rose-500' },
-    marketing: { label: 'Marketing', icon: '📊', gradient: 'from-green-500 to-emerald-500' },
-    administration: { label: 'Administration', icon: '📋', gradient: 'from-amber-500 to-orange-500' },
-    music: { label: 'Music', icon: '🎵', gradient: 'from-purple-500 to-violet-500' },
-    photography: { label: 'Photography', icon: '📷', gradient: 'from-teal-500 to-cyan-500' },
-    design: { label: 'Design', icon: '✨', gradient: 'from-fuchsia-500 to-pink-500' },
-    other: { label: 'Other', icon: '🌐', gradient: 'from-slate-500 to-gray-500' },
+  const map: Record<string, { label: string; icon: LucideIcon; gradient: string }> = {
+    tech: { label: 'Technology', icon: Laptop, gradient: 'from-blue-500 to-cyan-500' },
+    creative: { label: 'Creative', icon: Palette, gradient: 'from-pink-500 to-rose-500' },
+    marketing: { label: 'Marketing', icon: BarChart3, gradient: 'from-green-500 to-emerald-500' },
+    administration: { label: 'Administration', icon: ClipboardList, gradient: 'from-amber-500 to-orange-500' },
+    music: { label: 'Music', icon: Music, gradient: 'from-purple-500 to-violet-500' },
+    photography: { label: 'Photography', icon: Camera, gradient: 'from-teal-500 to-cyan-500' },
+    design: { label: 'Design', icon: Sparkles, gradient: 'from-fuchsia-500 to-pink-500' },
+    other: { label: 'Other', icon: Globe, gradient: 'from-slate-500 to-gray-500' },
   };
   return map[profession] || map.other;
 }

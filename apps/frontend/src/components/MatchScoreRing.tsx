@@ -12,11 +12,12 @@ const MatchScoreRing: React.FC<MatchScoreRingProps> = ({ score, size = 64, strok
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
 
+  // Use elegant minimal colors instead of bright semantic colors
   const getColor = () => {
-    if (score >= 80) return { stroke: '#10b981', bg: '#ecfdf5', text: '#065f46' };
-    if (score >= 60) return { stroke: '#6366f1', bg: '#eef2ff', text: '#3730a3' };
-    if (score >= 40) return { stroke: '#f59e0b', bg: '#fffbeb', text: '#92400e' };
-    return { stroke: '#ef4444', bg: '#fef2f2', text: '#991b1b' };
+    if (score >= 80) return { stroke: 'currentColor', text: 'currentColor', class: 'text-brand-900 dark:text-brand-50' };
+    if (score >= 60) return { stroke: 'currentColor', text: 'currentColor', class: 'text-surface-700 dark:text-surface-300' };
+    if (score >= 40) return { stroke: 'currentColor', text: 'currentColor', class: 'text-surface-500 dark:text-surface-500' };
+    return { stroke: 'currentColor', text: 'currentColor', class: 'text-surface-400 dark:text-surface-600' };
   };
 
   const color = getColor();
@@ -26,7 +27,10 @@ const MatchScoreRing: React.FC<MatchScoreRingProps> = ({ score, size = 64, strok
       <svg width={size} height={size} className="-rotate-90">
         <circle
           cx={size / 2} cy={size / 2} r={radius}
-          stroke="#e2e8f0" strokeWidth={strokeWidth} fill="none"
+          stroke="currentColor" 
+          strokeWidth={strokeWidth} 
+          fill="none"
+          className="text-surface-200 dark:text-brand-800"
         />
         <circle
           cx={size / 2} cy={size / 2} r={radius}
@@ -34,10 +38,10 @@ const MatchScoreRing: React.FC<MatchScoreRingProps> = ({ score, size = 64, strok
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          className="transition-all duration-1000 ease-out"
+          className={`transition-all duration-1000 ease-out ${color.class}`}
         />
       </svg>
-      <span className="absolute text-sm font-bold" style={{ color: color.text }}>
+      <span className={`absolute text-sm font-bold font-display tracking-tight ${color.class}`}>
         {Math.round(score)}%
       </span>
     </div>
