@@ -1,0 +1,168 @@
+import React, { useState } from 'react';
+import MatchScoreRing from '../components/MatchScoreRing';
+import SkillBadge from '../components/SkillBadge';
+import Button from '../components/Button';
+import Input from '../components/Input';
+
+// Demo data for showcase (real data would come from API)
+const demoMatches = [
+  {
+    id: '1', candidate: 'Alex Chen', profession: 'tech', title: 'Senior Full-Stack Developer',
+    score: 94, vectorSimilarity: 0.92, skillOverlap: 0.95, textRelevance: 0.88,
+    matchedSkills: ['React', 'TypeScript', 'Go', 'MongoDB', 'Docker'],
+    missingSkills: ['GraphQL'],
+  },
+  {
+    id: '2', candidate: 'Sarah Kim', profession: 'design', title: 'Lead UI/UX Designer',
+    score: 87, vectorSimilarity: 0.85, skillOverlap: 0.88, textRelevance: 0.82,
+    matchedSkills: ['Figma', 'Design Systems', 'Prototyping', 'User Research'],
+    missingSkills: ['Motion Design', 'Framer'],
+  },
+  {
+    id: '3', candidate: 'Jordan Lee', profession: 'tech', title: 'DevOps Engineer',
+    score: 76, vectorSimilarity: 0.78, skillOverlap: 0.72, textRelevance: 0.80,
+    matchedSkills: ['Kubernetes', 'Docker', 'CI/CD', 'AWS'],
+    missingSkills: ['Terraform', 'Go', 'Prometheus'],
+  },
+  {
+    id: '4', candidate: 'Maya Patel', profession: 'marketing', title: 'Growth Marketing Lead',
+    score: 68, vectorSimilarity: 0.65, skillOverlap: 0.70, textRelevance: 0.72,
+    matchedSkills: ['SEO', 'Analytics', 'Content Strategy'],
+    missingSkills: ['Paid Acquisition', 'SQL'],
+  },
+];
+
+const MatchScreen: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [matches] = useState(demoMatches);
+
+  return (
+    <div className="min-h-screen mesh-bg" id="match-page">
+      <div className="section-container py-10">
+        {/* Header */}
+        <div className="text-center mb-10 animate-slide-up">
+          <h1 className="text-3xl md:text-4xl font-bold font-display text-surface-900 mb-3">
+            AI <span className="gradient-text">Matching</span>
+          </h1>
+          <p className="text-surface-500 max-w-xl mx-auto">
+            Powered by semantic vector search and skill analysis to find the perfect candidate-job fit
+          </p>
+        </div>
+
+        {/* Search */}
+        <div className="max-w-2xl mx-auto mb-10 animate-slide-up animate-delay-100">
+          <div className="glass-card p-6">
+            <label className="block text-sm font-medium text-surface-700 mb-2">Describe the ideal candidate or role</label>
+            <div className="flex gap-3">
+              <Input
+                placeholder="e.g., Full-stack developer with React, Go, and Kubernetes experience..."
+                value={searchQuery}
+                onChange={setSearchQuery}
+                id="match-query"
+                className="flex-1 !mb-0"
+              />
+              <Button variant="primary" id="match-search-btn">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                Find Matches
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Match Results */}
+        <div className="max-w-4xl mx-auto space-y-6 animate-slide-up animate-delay-200">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-surface-900">{matches.length} matches found</h2>
+            <div className="flex items-center gap-2 text-sm text-surface-500">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-green-500" /> Vector Similarity
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-brand-500" /> Text Relevance
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-amber-500" /> Skill Overlap
+              </span>
+            </div>
+          </div>
+
+          {matches.map((match, i) => (
+            <div
+              key={match.id}
+              className="glass-card p-6 card-hover animate-slide-up"
+              style={{ animationDelay: `${(i + 3) * 100}ms` }}
+              id={`match-${match.id}`}
+            >
+              <div className="flex items-start gap-6">
+                {/* Score Ring */}
+                <div className="shrink-0">
+                  <MatchScoreRing score={match.score} size={80} strokeWidth={6} />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <h3 className="text-lg font-semibold text-surface-900">{match.candidate}</h3>
+                      <p className="text-sm text-surface-500">{match.title}</p>
+                    </div>
+                    <span className="text-2xl font-bold text-surface-900">{match.score}%</span>
+                  </div>
+
+                  {/* Score Breakdown */}
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-surface-500 mb-1">
+                        <span>Vector Similarity</span>
+                        <span>{Math.round(match.vectorSimilarity * 100)}%</span>
+                      </div>
+                      <div className="h-1.5 bg-surface-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-green-500 rounded-full transition-all duration-1000" style={{ width: `${match.vectorSimilarity * 100}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-surface-500 mb-1">
+                        <span>Text Relevance</span>
+                        <span>{Math.round(match.textRelevance * 100)}%</span>
+                      </div>
+                      <div className="h-1.5 bg-surface-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-brand-500 rounded-full transition-all duration-1000" style={{ width: `${match.textRelevance * 100}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-surface-500 mb-1">
+                        <span>Skill Overlap</span>
+                        <span>{Math.round(match.skillOverlap * 100)}%</span>
+                      </div>
+                      <div className="h-1.5 bg-surface-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-500 rounded-full transition-all duration-1000" style={{ width: `${match.skillOverlap * 100}%` }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {match.matchedSkills.map((skill) => (
+                      <span key={skill} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                        ✓ {skill}
+                      </span>
+                    ))}
+                    {match.missingSkills.map((skill) => (
+                      <span key={skill} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-500 border border-red-100">
+                        ✗ {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MatchScreen;
